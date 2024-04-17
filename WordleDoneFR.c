@@ -60,9 +60,9 @@ char* chooseTargetWord(const char* filename)
 }
                           
 int compareWords(const char* targetWord, const char* userGuess) {
-    int correctPositionCount = 0;
+    int correctPositionCount = 0; //holds the number of correct characters
     int correctCharacterCount = 0;
-    char tempTarget[WORD_LENGTH + 1];
+    char tempTarget[WORD_LENGTH + 1]; //arrays to hold the guess and target word
     char tempGuess[WORD_LENGTH + 1];
     strcpy(tempTarget, targetWord);
     strcpy(tempGuess, userGuess);
@@ -70,8 +70,8 @@ int compareWords(const char* targetWord, const char* userGuess) {
     //matches letters in correct position//
     for (int i = 0; i < WORD_LENGTH; i++) {
         if (tempTarget[i] == tempGuess[i]) {
-            correctPositionCount++;
-            tempTarget[i] = ' ';
+            correctPositionCount++; //increments the count up if there is a match
+            tempTarget[i] = ' '; //helps the program keep track of what is where
             tempGuess[i] = '*';
         }
     }
@@ -80,7 +80,7 @@ int compareWords(const char* targetWord, const char* userGuess) {
     for (int i = 0; i < WORD_LENGTH; i++) {
         for (int j = 0; j < WORD_LENGTH; j++) {
             if (tempTarget[i] != ' ' && tempTarget[i] == tempGuess[j] && tempGuess[j] != '*') {
-                correctCharacterCount++;
+                correctCharacterCount++; // increments up if the letter is present but not in the correct spot
                 printf("\n%c is in the word but in the wrong position", userGuess[j]); //prints the correct letter//
                 tempTarget[i] = ' ';
                 tempGuess[j] = '*';
@@ -92,7 +92,7 @@ int compareWords(const char* targetWord, const char* userGuess) {
     //finds wrong letters in incorrect positions//
     printf("\nIncorrect letters in wrong positions: ");
     for (int i = 0; i < WORD_LENGTH; i++) {
-        if (tempGuess[i] != '*') {
+        if (tempGuess[i] != '*') { //finds all the remaining letters in user guess word and prints them as wrong
             printf("%c ", userGuess[i]);
         }
     }
